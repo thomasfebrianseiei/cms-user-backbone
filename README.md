@@ -219,6 +219,44 @@
 
 
 
+# NFT Models Documentation
+
+## NftCollection
+
+- **Table name:** `nft_collection`
+- **Fields:**
+  - `nft_collection_idx`: Integer (Primary key)
+  - `nft_collection_name`: String
+  - `nft_collection_logo_file_path`: String
+  - `nft_collection_link`: String
+  - `nft_collection_total_assets`: Integer
+  - `nft_collection_regist_date`: DateTime (default `utcnow()`)
+  - `nft_collection_update_date`: DateTime
+  - `nft_collection_use_yn`: String (default 'Y')
+  - `nft_collection_slug_name`: String
+
+- **Relationships:**
+  - `nft_collection_price`: One-to-Many (relationship to `NftCollectionPrice`)
+
+## NftCollectionPrice
+
+- **Table name:** `nft_collection_price`
+- **Fields:**
+  - `nft_collection_price_idx`: Integer (Primary key)
+  - `nft_collection_idx`: Integer (Foreign key to `nft_collection`)
+  - `nft_collection_price_market_cap`: Numeric
+  - `nft_collection_price_week_volume`: Numeric
+  - `nft_collection_price_week_sales`: Numeric
+  - `nft_collection_price_regist_date`: DateTime (default `utcnow()`)
+  - `nft_collection_price_total_volume`: Numeric
+  - `nft_collection_price_day_volume`: Numeric
+  - `nft_collection_price_floor_price`: Numeric
+
+- **Relationships:**
+  - `nft_collection`: Many-to-One (relationship to `NftCollection`)
+
+
+
 
 
 
