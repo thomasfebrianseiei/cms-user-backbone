@@ -1,97 +1,139 @@
 
-# Database Schema Documentation
+# Cryptocurrency and Related Models Documentation
 
-## 1. `member` Table
-- **Description**: Stores information about members.
-- **Columns**:
-  - `member_idx`: Primary key, integer.
-  - `member_id`: Member's unique ID.
-  - `member_name`: Member's name.
-  - `member_grade_idx`: Foreign key linking to `member_grade`.
-  - `password_change_date`: Date when the password was last changed.
-  - `member_block_yn`: Indicates if the member is blocked (Yes/No).
-  - `member_regist_date`: Registration date.
-  - `member_use_yn`: Indicates if the member is active (Yes/No).
-- **Relationships**:
-  - `member_grade`: Links to the `MemberGrade` model.
-  - Other relationships: `CcAiSuggestion`, `CcAlarm`, `MemberAgreementItem`, `MemberLog`, `Portfolio`, and others.
+## Cc (Cryptocurrency)
 
-## 2. `member_agreement_item` Table
-- **Description**: Stores the agreements accepted or rejected by members.
-- **Columns**:
-  - `member_agreement_item_idx`: Primary key.
-  - `member_idx`: Foreign key linking to the `member` table.
-  - `agreement_idx`: Foreign key linking to the `agreement` table.
-  - `agree_yn`: Agreement status (Yes/No).
-  - `member_agreement_item_update_date`: Date when the agreement was updated.
-- **Relationships**:
-  - `member`: Links to the `member` table.
-  - `agreement`: Links to the `agreement` table.
+- **Table name:** `cryptocurrency`
+- **Fields:**
+  - `cc_idx`: Integer (Primary key)
+  - `cmc_idx`: Integer
+  - `cc_status_common_code`: String
+  - `cc_name`: String
+  - `cc_code`: String
+  - `cc_slug`: String
+  - `logo_file_path`: String
+  - `whitepaper_url`: String
+  - `whitepaper_file_path`: String
+  - `platform`: String
+  - `site_url`: String
+  - `cc_summary`: String
+  - `related_services_yn`: String
+  - `max_supply`: String
+  - `listing_date`: Date
+  - `cc_regist_date`: DateTime (default `utcnow()`)
+  - `cc_update_date`: DateTime
+  - `cc_use_yn`: String (default 'Y')
 
-## 3. `member_grade` Table
-- **Description**: Stores different grades or levels assigned to members.
-- **Columns**:
-  - `member_grade_idx`: Primary key.
-  - Other grade-related columns.
-- **Relationships**:
-  - `member`: Links to the `member` table (one-to-many relationship).
+- **Relationships:**
+  - `cc_ai_suggestion`: One-to-Many (relationship to `CcAiSuggestion`)
+  - `cc_alarm`: One-to-Many (relationship to `CcAlarm`)
+  - `cc_community`: One-to-Many (relationship to `CcCommunity`)
+  - `cc_development`: One-to-Many (relationship to `CcDevelopment`)
+  - `cc_tag_item`: One-to-Many (relationship to `CcTagItem`)
+  - `cc_watchlist_item`: One-to-Many (relationship to `CcWatchlistItem`)
+  - `cc_market_share`: One-to-Many (relationship to `CcMarketShare`)
+  - `currency`: One-to-Many (relationship to `Currency`)
+  - `ico`: One-to-Many (relationship to `Ico`)
+  - `ico_alarm`: One-to-Many (relationship to `IcoAlarm`)
+  - `cc_day_trade`: One-to-Many (relationship to `CcDayTrade`)
+  - `cc_link_item`: One-to-Many (relationship to `CcLinkItem`)
+  - `ai_anomaly_detection`: One-to-Many (relationship to `AiAnomalyDetection`)
+  - `ai_candlestick_prediction`: One-to-Many (relationship to `AiCandlestickPrediction`)
+  - `ai_price_data`: One-to-Many (relationship to `AiPriceData`)
+  - `ai_valuation`: One-to-Many (relationship to `AiValuation`)
+  - `news_item`: One-to-Many (relationship to `NewsItem`)
+  - `pair`: One-to-Many (relationship to `Pair`)
+  - `contributor`: One-to-Many (relationship to `Contributor`)
+  - `portfolio_item`: One-to-Many (relationship to `PortfolioItem`)
 
-## 4. `cms_score_list` Table
-- **Description**: Stores scores for various cryptocurrencies.
-- **Columns**:
-  - `idx`: Primary key, autoincrement.
-  - `cc_idx`: Foreign key linking to the `cryptocurrency` table.
-  - `cc_name`: Name of the cryptocurrency.
-  - `cc_code`: Code of the cryptocurrency.
-  - `logo_file_path`: Path to the cryptocurrency logo.
-  - `sum_score`: Total score of the cryptocurrency.
-- **Purpose**: Stores cryptocurrency scores used for comparison or display.
+## CcAiSuggestion
 
-## 5. `member_fcm_token` Table
-- **Description**: Stores Firebase Cloud Messaging (FCM) tokens for members.
-- **Columns**:
-  - `member_fcm_token_idx`: Primary key.
-  - `member_idx`: Foreign key linking to the `member` table.
-  - `fcm_token`: FCM token string.
-  - `device`: Device information.
-  - `member_fcm_token_regist_date`: Date when the FCM token was registered.
-  - `member_fcm_token_update_date`: Date when the FCM token was updated.
-- **Purpose**: Used to manage device tokens for sending notifications to members.
+- **Table name:** `cryptocurrency_ai_suggestion`
+- **Fields:**
+  - `cc_ai_suggestion_idx`: Integer (Primary key)
+  - `member_idx`: Integer (Foreign key to `member`)
+  - `cc_idx`: Integer (Foreign key to `cryptocurrency`)
+  - `column4`: String
+  - `column5`: String
+  - `column6`: String
 
-## 6. `app_alarm` Table
-- **Description**: Stores alarms that are generated in the system.
-- **Columns**:
-  - `app_alarm_idx`: Primary key.
-  - `app_alarm_type`: Type of alarm (info, warning, etc.).
-  - `app_alarm_subject`: Subject of the alarm.
-  - `app_alarm_content`: Alarm message.
-  - `app_alarm_count`: Number of occurrences of this alarm.
-  - `manager_idx`: Foreign key linking to the `manager` table.
-  - `app_alarm_regist_date`: Date when the alarm was created.
-  
-## 7. `app_alarm_item` Table
-- **Description**: Stores individual alarm items triggered for specific members.
-- **Columns**:
-  - `app_alarm_item_idx`: Primary key.
-  - `app_alarm_idx`: Foreign key linking to the `app_alarm` table.
-  - `member_idx`: Foreign key linking to the `member` table.
-  
-## 8. `member_openapi` Table
-- **Description**: Stores OpenAPI keys associated with members.
-- **Columns**:
-  - `member_openapi_idx`: Primary key.
-  - `member_idx`: Foreign key linking to the `member` table.
-  - `member_openapi_key`: The API key assigned to the member.
-  - `member_openapi_regist_date`: Date when the API key was registered.
-  - `member_openapi_use_yn`: Indicates if the API key is active (Yes/No).
-  
-## Relationships Overview:
-1. **Member to Grade**: A member is associated with a grade, defined in the `member_grade` table.
-2. **Member to Agreements**: Members can have multiple agreement items linked to them in the `member_agreement_item` table.
-3. **Cryptocurrency Scores**: Cryptocurrencies are scored in the `cms_score_list` table.
-4. **FCM Tokens**: Members have Firebase Cloud Messaging tokens stored in `member_fcm_token`.
-5. **App Alarms**: System-wide alarms are stored in `app_alarm`, and members can have specific alarm items in `app_alarm_item`.
-6. **OpenAPI Keys**: Members can be assigned API keys for external integration, stored in `member_openapi`.
+- **Relationships:**
+  - `cc`: Many-to-One (relationship to `Cc`)
+  - `member`: Many-to-One (relationship to `Member`)
+
+## CcAlarm
+
+- **Table name:** `cryptocurrency_alarm`
+- **Fields:**
+  - `cc_alarm_idx`: Integer (Primary key)
+  - `member_idx`: Integer (Foreign key to `member`)
+  - `cc_idx`: Integer (Foreign key to `cryptocurrency`)
+  - `cc_alarm_market_price`: Numeric
+  - `cc_alarm_date`: DateTime
+  - `cc_alarm_regist_date`: DateTime (default `utcnow()`)
+  - `cc_alarm_update_date`: DateTime
+  - `cc_alarm_use_yn`: String (default 'Y')
+
+- **Relationships:**
+  - `cc`: Many-to-One (relationship to `Cc`)
+  - `member`: Many-to-One (relationship to `Member`)
+
+## CcCommunity
+
+- **Table name:** `cryptocurrency_community`
+- **Fields:**
+  - `cc_community_idx`: Integer (Primary key)
+  - `cc_idx`: Integer (Foreign key to `cryptocurrency`)
+  - `facebook_likes`: Integer
+  - `twitter_followers`: Integer
+  - `reddit_average_posts_48h`: Numeric
+  - `reddit_average_comments_48h`: Numeric
+  - `reddit_subscribers`: Integer
+  - `reddit_accounts_active_48h`: Numeric
+  - `telegram_channel_user_count`: Numeric
+  - `cc_community_regist_date`: DateTime (default `utcnow()`)
+  - `cc_community_update_date`: DateTime
+
+- **Relationships:**
+  - `cc`: Many-to-One (relationship to `Cc`)
+
+## CcDevelopment
+
+- **Table name:** `cryptocurrency_development`
+- **Fields:**
+  - `cc_development_idx`: Integer (Primary key)
+  - `cc_idx`: Integer (Foreign key to `cryptocurrency`)
+  - `fork_count`: Integer
+  - `star_count`: Integer
+  - `subscriber_count`: Integer
+  - `total_issue_count`: Integer
+  - `closed_issue_count`: Integer
+  - `pull_request_merged_count`: Integer
+  - `pull_request_contributors_count`: Integer
+  - `code_addition_4_weeks_count`: Integer
+  - `code_deletion_4_weeks_count`: Integer
+  - `commit_4_weeks_count`: Integer
+  - `cc_development_regist_date`: DateTime (default `utcnow()`)
+  - `cc_development_update_date`: DateTime
+
+- **Relationships:**
+  - `cc`: Many-to-One (relationship to `Cc`)
+
+## CcTagItem
+
+- **Table name:** `cryptocurrency_tag_item`
+- **Fields:**
+  - `cc_tag_item_idx`: Integer (Primary key)
+  - `cc_idx`: Integer (Foreign key to `cryptocurrency`)
+  - `tag_idx`: Integer (Foreign key to `tag`)
+  - `cc_tag_item_regist_date`: DateTime (default `utcnow()`)
+  - `cc_tag_item_update_date`: DateTime
+  - `cc_tag_item_use_yn`: String (default 'Y')
+
+- **Relationships:**
+  - `cc`: Many-to-One (relationship to `Cc`)
+  - `tag`: Many-to-One (relationship to `Tag`)
+
 
 
 
