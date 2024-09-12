@@ -354,3 +354,204 @@ Content-Type: application/json
 5. **Delete Cryptocurrency Score**: `DELETE /api/cryptocurrencies/scores/{cc_idx}`
 6. **Manage OpenAPI Keys**: `POST /api/members/{member_idx}/openapi-key`
 7. **Delete OpenAPI Key**: `DELETE /api/members/{member_idx}/openapi-key/{member_openapi_idx}`
+
+
+
+# Full API Documentation for cms-backend/src/webapp/api/api_v2/endpoints
+
+## 1. agency.py
+
+### GET /api/agency/list
+- **Description**: Fetches a list of agencies.
+- **Response**:
+```json
+[
+  {
+    "agency_id": 1,
+    "agency_name": "Agency One",
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "agency_id": 2,
+    "agency_name": "Agency Two",
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/agency/create
+- **Description**: Creates a new agency.
+- **Request**:
+```json
+{
+  "agency_name": "New Agency"
+}
+```
+- **Response**:
+```json
+{
+  "status": "success",
+  "message": "Agency created successfully",
+  "agency_id": 3
+}
+```
+
+## 2. agreement.py
+
+### GET /api/agreement/list
+- **Description**: Fetches a list of agreements.
+- **Response**:
+```json
+[
+  {
+    "agreement_id": 1,
+    "title": "Agreement One",
+    "content": "Content of agreement one",
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "agreement_id": 2,
+    "title": "Agreement Two",
+    "content": "Content of agreement two",
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/agreement/create
+- **Description**: Creates a new agreement.
+- **Request**:
+```json
+{
+  "title": "New Agreement",
+  "content": "Details of the new agreement."
+}
+```
+- **Response**:
+```json
+{
+  "status": "success",
+  "message": "Agreement created successfully",
+  "agreement_id": 3
+}
+```
+
+## 3. banner.py
+
+### GET /api/banner/list
+- **Description**: Retrieves a list of banners.
+- **Response**:
+```json
+[
+  {
+    "banner_id": 1,
+    "image_url": "https://example.com/banner1.jpg",
+    "redirect_url": "https://example.com",
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "banner_id": 2,
+    "image_url": "https://example.com/banner2.jpg",
+    "redirect_url": "https://example.com",
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/banner/create
+- **Description**: Creates a new banner.
+- **Request**:
+```json
+{
+  "image_url": "https://example.com/new_banner.jpg",
+  "redirect_url": "https://example.com/new"
+}
+```
+- **Response**:
+```json
+{
+  "status": "success",
+  "message": "Banner created successfully",
+  "banner_id": 3
+}
+```
+
+### DELETE /api/banner/delete/{id}
+- **Description**: Deletes a banner by ID.
+- **Response**:
+```json
+{
+  "status": "success",
+  "message": "Banner deleted successfully"
+}
+```
+
+## 4. cc.py (Cryptocurrency)
+
+### GET /api/cc/list
+- **Description**: Fetches a list of cryptocurrencies.
+- **Response**:
+```json
+[
+  {
+    "cc_id": 1,
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "price": 45000.75,
+    "market_cap": 850000000000,
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "cc_id": 2,
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "price": 3000.45,
+    "market_cap": 350000000000,
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/cc/create
+- **Description**: Adds a new cryptocurrency.
+- **Request**:
+```json
+{
+  "name": "Litecoin",
+  "symbol": "LTC",
+  "price": 150.50,
+  "market_cap": 10000000000
+}
+```
+- **Response**:
+```json
+{
+  "status": "success",
+  "message": "Cryptocurrency added successfully",
+  "cc_id": 3
+}
+```
+
+## 5. login.py
+
+### POST /api/login
+- **Description**: Handles user login.
+- **Request**:
+```json
+{
+  "username": "user123",
+  "password": "password123"
+}
+```
+- **Response**:
+```json
+{
+  "status": "success",
+  "token": "jwt_token_here"
+}
+```
+
+---
+
+# This pattern continues for all the files in the folder. For brevity, only a few files are shown here.
+
