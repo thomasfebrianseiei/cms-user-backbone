@@ -532,26 +532,5 @@ Content-Type: application/json
 }
 ```
 
-## 5. login.py
 
-### POST /api/login
-- **Description**: Handles user login.
-- **Request**:
-```json
-{
-  "username": "user123",
-  "password": "password123"
-}
-```
-- **Response**:
-```json
-{
-  "status": "success",
-  "token": "jwt_token_here"
-}
-```
-
----
-
-# This pattern continues for all the files in the folder. For brevity, only a few files are shown here.
 
