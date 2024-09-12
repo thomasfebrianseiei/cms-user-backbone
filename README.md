@@ -136,6 +136,90 @@
 
 
 
+# Additional Models Documentation
+
+## Language
+
+- **Table name:** `language`
+- **Fields:**
+  - `language_idx`: Integer (Primary key)
+  - `language_name`: String
+  - `language_notation`: String
+  - `language_regist_date`: DateTime (default `utcnow()`)
+  - `language_update_date`: DateTime
+  - `language_use_yn`: String (default 'Y')
+
+## SpatialRefSys
+
+- **Table name:** `spatial_ref_sys`
+- **Fields:**
+  - `srid`: Integer (Primary key)
+  - `auth_name`: String
+  - `auth_srid`: Integer
+  - `srtext`: String
+  - `proj4text`: String
+
+## TimeCommonCode
+
+- **Table name:** `time_common_code`
+- **Fields:**
+  - `time_code_idx`: Integer (Primary key)
+  - `time`: String
+  - `time_code`: Integer
+
+## CommonCode
+
+- **Table name:** `common_code`
+- **Fields:**
+  - `common_code_idx`: Integer (Primary key)
+  - `code`: String
+  - `name`: String
+  - `parent_code`: String
+  - `note`: String
+  - `common_code_regist_date`: DateTime (default `utcnow()`)
+  - `common_code_update_date`: DateTime
+  - `common_code_use_yn`: String (default 'Y')
+
+## Subscription
+
+- **Table name:** `subscription`
+- **Fields:**
+  - `subscription_idx`: Integer (Primary key)
+  - `member_idx`: Integer (Foreign key to `member`)
+  - `subscription_name`: String
+  - `subscription_email`: String
+  - `subscription_regist_date`: DateTime (default `utcnow()`)
+  - `subscription_update_date`: DateTime
+  - `subscription_use_yn`: String (default 'Y')
+
+- **Relationships:**
+  - `member`: Many-to-One (relationship to `Member`)
+
+## NewsLetter
+
+- **Table name:** `news_letter`
+- **Fields:**
+  - `news_letter_idx`: Integer (Primary key)
+  - `news_letter_subject`: String
+  - `news_letter_content`: String
+  - `news_letter_regist_date`: DateTime (default `utcnow()`)
+  - `news_letter_count`: Integer
+  - `member_idx_list`: String
+
+## ErrorLog
+
+- **Table name:** `error_log`
+- **Fields:**
+  - `error_log_idx`: Integer (Primary key)
+  - `error_log_type`: String
+  - `error_log_content1`: String
+  - `error_log_content2`: String
+  - `error_log_content3`: String
+  - `error_log_actual_date`: DateTime (default `utcnow()`)
+
+
+
+
 
 
 
