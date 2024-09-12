@@ -96,274 +96,19 @@
 
 
 
+
 # API Documentation
 
-## 1. Get Member Information
-- **Endpoint**: `GET /api/members/{member_idx}`
-- **Description**: Fetch a member's detailed information by `member_idx`.
-
-### Example Request:
-```
-GET /api/members/1
-```
-
-### Example Response:
-```json
-{
-  "member_idx": 1,
-  "member_id": "john_doe",
-  "member_name": "John Doe",
-  "member_grade": "Premium",
-  "member_regist_date": "2023-01-15T12:34:56Z",
-  "member_use_yn": "Y"
-}
-```
-
-## 2. Create Member
-- **Endpoint**: `POST /api/members`
-- **Description**: Create a new member.
-
-### Example Request:
-```
-POST /api/members
-Content-Type: application/json
-
-{
-  "member_id": "jane_doe",
-  "member_name": "Jane Doe",
-  "member_grade_idx": 2,
-  "password": "password123"
-}
-```
-
-### Example Response:
-```json
-{
-  "member_idx": 2,
-  "member_id": "jane_doe",
-  "member_name": "Jane Doe",
-  "member_grade": "Basic",
-  "member_regist_date": "2024-09-11T09:21:34Z"
-}
-```
-
-## 3. Update Member
-- **Endpoint**: `PUT /api/members/{member_idx}`
-- **Description**: Update details for a specific member.
-
-### Example Request:
-```
-PUT /api/members/2
-Content-Type: application/json
-
-{
-  "member_name": "Jane Doe Updated",
-  "member_grade_idx": 3
-}
-```
-
-### Example Response:
-```json
-{
-  "member_idx": 2,
-  "member_id": "jane_doe",
-  "member_name": "Jane Doe Updated",
-  "member_grade": "VIP",
-  "member_update_date": "2024-09-11T12:21:34Z"
-}
-```
-
-## 4. Delete Member
-- **Endpoint**: `DELETE /api/members/{member_idx}`
-- **Description**: Delete a member.
-
-### Example Request:
-```
-DELETE /api/members/2
-```
-
-### Example Response:
-```json
-{
-  "message": "Member deleted successfully"
-}
-```
-
-## 5. Get Member Agreements
-- **Endpoint**: `GET /api/members/{member_idx}/agreements`
-- **Description**: Fetch all agreement items for a specific member.
-
-### Example Request:
-```
-GET /api/members/1/agreements
-```
-
-### Example Response:
-```json
-[
-  {
-    "agreement_idx": 1,
-    "agree_yn": "Y",
-    "member_agreement_item_update_date": "2023-01-10T10:00:00Z"
-  },
-  {
-    "agreement_idx": 2,
-    "agree_yn": "N",
-    "member_agreement_item_update_date": "2023-01-11T11:00:00Z"
-  }
-]
-```
-
-## 6. Add Agreement for Member
-- **Endpoint**: `POST /api/members/{member_idx}/agreements`
-- **Description**: Add an agreement item for a member.
-
-### Example Request:
-```
-POST /api/members/1/agreements
-Content-Type: application/json
-
-{
-  "agreement_idx": 3,
-  "agree_yn": "Y"
-}
-```
-
-### Example Response:
-```json
-{
-  "member_agreement_item_idx": 4,
-  "agreement_idx": 3,
-  "member_idx": 1,
-  "agree_yn": "Y",
-  "member_agreement_item_update_date": "2024-09-11T14:21:34Z"
-}
-```
-
-## 7. Get Cryptocurrency Scores
-- **Endpoint**: `GET /api/cryptocurrencies/scores`
-- **Description**: Fetch all cryptocurrency scores.
-
-### Example Request:
-```
-GET /api/cryptocurrencies/scores
-```
-
-### Example Response:
-```json
-[
-  {
-    "cc_idx": 1,
-    "cc_name": "Bitcoin",
-    "cc_code": "BTC",
-    "logo_file_path": "/path/to/bitcoin/logo.png",
-    "sum_score": 95.0
-  },
-  {
-    "cc_idx": 2,
-    "cc_name": "Ethereum",
-    "cc_code": "ETH",
-    "logo_file_path": "/path/to/ethereum/logo.png",
-    "sum_score": 89.5
-  }
-]
-```
-
-## 8. Update Cryptocurrency Score
-- **Endpoint**: `PUT /api/cryptocurrencies/scores/{cc_idx}`
-- **Description**: Update the score for a cryptocurrency.
-
-### Example Request:
-```
-PUT /api/cryptocurrencies/scores/1
-Content-Type: application/json
-
-{
-  "sum_score": 96.0
-}
-```
-
-### Example Response:
-```json
-{
-  "cc_idx": 1,
-  "cc_name": "Bitcoin",
-  "sum_score": 96.0,
-  "cc_update_date": "2024-09-11T15:21:34Z"
-}
-```
-
-## 9. Manage Firebase Cloud Messaging (FCM) Tokens
-- **Endpoint**: `POST /api/members/{member_idx}/fcm-token`
-- **Description**: Register or update an FCM token for a member.
-
-### Example Request:
-```
-POST /api/members/1/fcm-token
-Content-Type: application/json
-
-{
-  "fcm_token": "new_token_value",
-  "device": "Android"
-}
-```
-
-### Example Response:
-```json
-{
-  "member_fcm_token_idx": 3,
-  "fcm_token": "new_token_value",
-  "device": "Android",
-  "member_fcm_token_regist_date": "2024-09-11T16:21:34Z"
-}
-```
-
-## 10. Trigger App Alarm
-- **Endpoint**: `POST /api/alarms`
-- **Description**: Create a new app alarm.
-
-### Example Request:
-```
-POST /api/alarms
-Content-Type: application/json
-
-{
-  "app_alarm_type": "warning",
-  "app_alarm_subject": "Low Balance",
-  "app_alarm_content": "Your balance is below the minimum limit.",
-  "manager_idx": 1
-}
-```
-
-### Example Response:
-```json
-{
-  "app_alarm_idx": 5,
-  "app_alarm_type": "warning",
-  "app_alarm_subject": "Low Balance",
-  "app_alarm_content": "Your balance is below the minimum limit.",
-  "app_alarm_regist_date": "2024-09-11T17:21:34Z"
-}
-```
-
-## Additional APIs
-1. **Get All Members**: `GET /api/members`
-2. **Get All App Alarms**: `GET /api/alarms`
-3. **Delete App Alarm**: `DELETE /api/alarms/{app_alarm_idx}`
-4. **Get Single Cryptocurrency Score**: `GET /api/cryptocurrencies/scores/{cc_idx}`
-5. **Delete Cryptocurrency Score**: `DELETE /api/cryptocurrencies/scores/{cc_idx}`
-6. **Manage OpenAPI Keys**: `POST /api/members/{member_idx}/openapi-key`
-7. **Delete OpenAPI Key**: `DELETE /api/members/{member_idx}/openapi-key/{member_openapi_idx}`
-
-
-
-# Full API Documentation for cms-backend/src/webapp/api/api_v2/endpoints
-
-## 1. agency.py
+## 1. Agency
 
 ### GET /api/agency/list
-- **Description**: Fetches a list of agencies.
-- **Response**:
+
+Response Data Types:
+- `agency_id`: Integer
+- `agency_name`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
 ```json
 [
   {
@@ -380,14 +125,23 @@ Content-Type: application/json
 ```
 
 ### POST /api/agency/create
-- **Description**: Creates a new agency.
-- **Request**:
+
+Request Data Types:
+- `agency_name`: String
+
+Request Example:
 ```json
 {
   "agency_name": "New Agency"
 }
 ```
-- **Response**:
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `agency_id`: Integer
+
+Response Example:
 ```json
 {
   "status": "success",
@@ -396,11 +150,17 @@ Content-Type: application/json
 }
 ```
 
-## 2. agreement.py
+## 2. Agreement
 
 ### GET /api/agreement/list
-- **Description**: Fetches a list of agreements.
-- **Response**:
+
+Response Data Types:
+- `agreement_id`: Integer
+- `title`: String
+- `content`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
 ```json
 [
   {
@@ -419,15 +179,25 @@ Content-Type: application/json
 ```
 
 ### POST /api/agreement/create
-- **Description**: Creates a new agreement.
-- **Request**:
+
+Request Data Types:
+- `title`: String
+- `content`: String
+
+Request Example:
 ```json
 {
   "title": "New Agreement",
   "content": "Details of the new agreement."
 }
 ```
-- **Response**:
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `agreement_id`: Integer
+
+Response Example:
 ```json
 {
   "status": "success",
@@ -436,11 +206,17 @@ Content-Type: application/json
 }
 ```
 
-## 3. banner.py
+## 3. Banner
 
 ### GET /api/banner/list
-- **Description**: Retrieves a list of banners.
-- **Response**:
+
+Response Data Types:
+- `banner_id`: Integer
+- `image_url`: String (URL)
+- `redirect_url`: String (URL)
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
 ```json
 [
   {
@@ -459,15 +235,25 @@ Content-Type: application/json
 ```
 
 ### POST /api/banner/create
-- **Description**: Creates a new banner.
-- **Request**:
+
+Request Data Types:
+- `image_url`: String (URL)
+- `redirect_url`: String (URL)
+
+Request Example:
 ```json
 {
   "image_url": "https://example.com/new_banner.jpg",
   "redirect_url": "https://example.com/new"
 }
 ```
-- **Response**:
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `banner_id`: Integer
+
+Response Example:
 ```json
 {
   "status": "success",
@@ -476,9 +262,13 @@ Content-Type: application/json
 }
 ```
 
-### DELETE /api/banner/delete/{id}
-- **Description**: Deletes a banner by ID.
-- **Response**:
+### DELETE /api/banner/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
 ```json
 {
   "status": "success",
@@ -486,11 +276,19 @@ Content-Type: application/json
 }
 ```
 
-## 4. cc.py (Cryptocurrency)
+## 4. Cryptocurrency (CC)
 
 ### GET /api/cc/list
-- **Description**: Fetches a list of cryptocurrencies.
-- **Response**:
+
+Response Data Types:
+- `cc_id`: Integer
+- `name`: String
+- `symbol`: String
+- `price`: Float
+- `market_cap`: Float
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
 ```json
 [
   {
@@ -513,8 +311,14 @@ Content-Type: application/json
 ```
 
 ### POST /api/cc/create
-- **Description**: Adds a new cryptocurrency.
-- **Request**:
+
+Request Data Types:
+- `name`: String
+- `symbol`: String
+- `price`: Float
+- `market_cap`: Float
+
+Request Example:
 ```json
 {
   "name": "Litecoin",
@@ -523,7 +327,13 @@ Content-Type: application/json
   "market_cap": 10000000000
 }
 ```
-- **Response**:
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `cc_id`: Integer
+
+Response Example:
 ```json
 {
   "status": "success",
@@ -531,6 +341,789 @@ Content-Type: application/json
   "cc_id": 3
 }
 ```
+
+### DELETE /api/cc/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Cryptocurrency deleted successfully"
+}
+```
+
+## 5. Error Report
+
+### GET /api/error_report/list
+
+Response Data Types:
+- `report_id`: Integer
+- `error_message`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "report_id": 1,
+    "error_message": "Error 404",
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "report_id": 2,
+    "error_message": "Error 500",
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/error_report/create
+
+Request Data Types:
+- `error_message`: String
+- `details`: String
+
+Request Example:
+```json
+{
+  "error_message": "Database connection failed",
+  "details": "Detailed error description here"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Error report submitted successfully"
+}
+```
+
+## 6. Login
+
+### POST /api/login
+
+Request Data Types:
+- `username`: String
+- `password`: String
+
+Request Example:
+```json
+{
+  "username": "user123",
+  "password": "password123"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `token`: String (JWT token)
+
+Response Example:
+```json
+{
+  "status": "success",
+  "token": "jwt_token_here"
+}
+```
+
+
+## 7. Exchange
+
+### GET /api/exchange/list
+
+Response Data Types:
+- `exchange_id`: Integer
+- `name`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "exchange_id": 1,
+    "name": "Binance",
+    "created_at": "2023-01-01T12:00:00Z"
+  },
+  {
+    "exchange_id": 2,
+    "name": "Coinbase",
+    "created_at": "2023-01-05T15:00:00Z"
+  }
+]
+```
+
+### POST /api/exchange/create
+
+Request Data Types:
+- `name`: String
+- `details`: String
+
+Request Example:
+```json
+{
+  "name": "Kraken",
+  "details": "Some details about the exchange"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `exchange_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Exchange created successfully",
+  "exchange_id": 3
+}
+```
+
+### DELETE /api/exchange/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Exchange deleted successfully"
+}
+```
+
+## 8. FAQ
+
+### GET /api/faq/list
+
+Response Data Types:
+- `faq_id`: Integer
+- `question`: String
+- `answer`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "faq_id": 1,
+    "question": "What is cryptocurrency?",
+    "answer": "Cryptocurrency is a type of digital asset.",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/faq/create
+
+Request Data Types:
+- `question`: String
+- `answer`: String
+
+Request Example:
+```json
+{
+  "question": "How do I buy Bitcoin?",
+  "answer": "You can buy Bitcoin on exchanges like Binance."
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `faq_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "FAQ created successfully",
+  "faq_id": 2
+}
+```
+
+## 9. ICO
+
+### GET /api/ico/list
+
+Response Data Types:
+- `ico_id`: Integer
+- `name`: String
+- `status`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "ico_id": 1,
+    "name": "ICO One",
+    "status": "active",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/ico/create
+
+Request Data Types:
+- `name`: String
+- `status`: String
+
+Request Example:
+```json
+{
+  "name": "New ICO",
+  "status": "upcoming"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `ico_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "ICO created successfully",
+  "ico_id": 2
+}
+```
+
+## 10. Member
+
+### GET /api/member/list
+
+Response Data Types:
+- `member_id`: Integer
+- `name`: String
+- `email`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "member_id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/member/create
+
+Request Data Types:
+- `name`: String
+- `email`: String
+
+Request Example:
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `member_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Member created successfully",
+  "member_id": 2
+}
+```
+
+## 11. Membership
+
+### GET /api/membership/list
+
+Response Data Types:
+- `membership_id`: Integer
+- `plan_name`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "membership_id": 1,
+    "plan_name": "Premium",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/membership/create
+
+Request Data Types:
+- `plan_name`: String
+
+Request Example:
+```json
+{
+  "plan_name": "Gold"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `membership_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Membership created successfully",
+  "membership_id": 2
+}
+```
+
+
+
+## 12. News
+
+### GET /api/news/list
+
+Response Data Types:
+- `news_id`: Integer
+- `title`: String
+- `content`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "news_id": 1,
+    "title": "Crypto Market Update",
+    "content": "The crypto market is experiencing a surge...",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/news/create
+
+Request Data Types:
+- `title`: String
+- `content`: String
+
+Request Example:
+```json
+{
+  "title": "New Bitcoin Record",
+  "content": "Bitcoin reaches an all-time high..."
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `news_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "News created successfully",
+  "news_id": 2
+}
+```
+
+## 13. NFT
+
+### GET /api/nft/list
+
+Response Data Types:
+- `nft_id`: Integer
+- `name`: String
+- `creator`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "nft_id": 1,
+    "name": "CryptoPunk #1",
+    "creator": "John Doe",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/nft/create
+
+Request Data Types:
+- `name`: String
+- `creator`: String
+
+Request Example:
+```json
+{
+  "name": "CryptoPunk #2",
+  "creator": "Jane Doe"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `nft_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "NFT created successfully",
+  "nft_id": 2
+}
+```
+
+## 14. Portfolio
+
+### GET /api/portfolio/list
+
+Response Data Types:
+- `portfolio_id`: Integer
+- `name`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "portfolio_id": 1,
+    "name": "My Crypto Portfolio",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/portfolio/create
+
+Request Data Types:
+- `name`: String
+
+Request Example:
+```json
+{
+  "name": "New Portfolio"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `portfolio_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Portfolio created successfully",
+  "portfolio_id": 2
+}
+```
+
+### DELETE /api/portfolio/delete/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Portfolio deleted successfully"
+}
+```
+
+## 15. Privacy
+
+### GET /api/privacy/list
+
+Response Data Types:
+- `privacy_id`: Integer
+- `policy`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "privacy_id": 1,
+    "policy": "We respect your privacy...",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/privacy/create
+
+Request Data Types:
+- `policy`: String
+
+Request Example:
+```json
+{
+  "policy": "Our new privacy policy..."
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `privacy_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Privacy policy created successfully",
+  "privacy_id": 2
+}
+```
+
+## 16. Q&A
+
+### GET /api/qna/list
+
+Response Data Types:
+- `qna_id`: Integer
+- `question`: String
+- `answer`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "qna_id": 1,
+    "question": "How to buy Bitcoin?",
+    "answer": "You can buy Bitcoin on exchanges.",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/qna/create
+
+Request Data Types:
+- `question`: String
+- `answer`: String
+
+Request Example:
+```json
+{
+  "question": "How do I store Bitcoin?",
+  "answer": "You can store Bitcoin in a wallet."
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `qna_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Q&A created successfully",
+  "qna_id": 2
+}
+```
+
+## 17. Subscription
+
+### GET /api/subscription/list
+
+Response Data Types:
+- `subscription_id`: Integer
+- `plan`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "subscription_id": 1,
+    "plan": "Premium Plan",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/subscription/create
+
+Request Data Types:
+- `plan`: String
+
+Request Example:
+```json
+{
+  "plan": "Gold Plan"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `subscription_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Subscription created successfully",
+  "subscription_id": 2
+}
+```
+
+### DELETE /api/subscription/delete/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Subscription deleted successfully"
+}
+```
+
+## 18. Terms of Service
+
+### GET /api/terms_of_service/list
+
+Response Data Types:
+- `terms_id`: Integer
+- `content`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "terms_id": 1,
+    "content": "These are the terms of service...",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/terms_of_service/create
+
+Request Data Types:
+- `content`: String
+
+Request Example:
+```json
+{
+  "content": "New terms of service..."
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `terms_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Terms of service created successfully",
+  "terms_id": 2
+}
+```
+
+## 19. Watchlist
+
+### GET /api/watchlist/list
+
+Response Data Types:
+- `watchlist_id`: Integer
+- `item_name`: String
+- `created_at`: DateTime (ISO 8601)
+
+Response Example:
+```json
+[
+  {
+    "watchlist_id": 1,
+    "item_name": "Bitcoin",
+    "created_at": "2023-01-01T12:00:00Z"
+  }
+]
+```
+
+### POST /api/watchlist/create
+
+Request Data Types:
+- `item_name`: String
+
+Request Example:
+```json
+{
+  "item_name": "Ethereum"
+}
+```
+
+Response Data Types:
+- `status`: String
+- `message`: String
+- `watchlist_id`: Integer
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Item added to watchlist",
+  "watchlist_id": 2
+}
+```
+
+### DELETE /api/watchlist/delete/{id}
+
+Response Data Types:
+- `status`: String
+- `message`: String
+
+Response Example:
+```json
+{
+  "status": "success",
+  "message": "Item removed from watchlist"
+}
+```
+
+
 
 
 
