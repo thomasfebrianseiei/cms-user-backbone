@@ -1,4 +1,4 @@
-# Cryptocurrency and Related Models Documentation
+# CMS User Related Models Documentation
 
 ![postgres - public](https://github.com/user-attachments/assets/f97e3061-4e45-4e78-91e7-d4b8e4601d24)
 
